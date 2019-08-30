@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Domain</key>
+	<string>login-sso-apps.identityplayground.com</string>
+	<key>ClientId</key>
+	<string>RcMbvKQo8dKhOCEkN1PNxrF9hFAx0blZ</string>
+	<key>Auth0Domain</key>
+	<string>pravinady-sso-apps.auth0.com</string>
+</dict>
+</plist>
