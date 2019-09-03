@@ -24,8 +24,12 @@
 import UIKit
 import Auth0
 import SafariServices
+import AuthenticationServices
 
+@available(iOS 12.0, *)
 class HomeViewController: UIViewController {
+    
+    private var authSession: ASWebAuthenticationSession?
 
     // MARK: - IBAction
     @IBAction func showLoginController(_ sender: UIButton) {
@@ -55,20 +59,34 @@ class HomeViewController: UIViewController {
         }
     }
     
+    
+    fileprivate static let NoBundleIdentifier = "com.auth0.this-is-no-bundle"
+    
+    var redirectURL: URL? {
+        let bundleIdentifier = Bundle.main.bundleIdentifier
+        var components = URLComponents(url: URL(string: "http://spa-app.identityplayground.com") ?? URL(string: "http://spa-app.identityplayground.com")!, resolvingAgainstBaseURL: true)
+        components?.scheme = bundleIdentifier ?? "auth0.samples.Auth0Sample" + "://"
+        return components?.url?
+            .appendingPathComponent("ios")
+            .appendingPathComponent(bundleIdentifier ?? "auth0.samples.Auth0Sample")
+            .appendingPathComponent("callback")
+    }
+    
     @IBAction func showWebApp(_ sender: UIButton) {
-        self.showSuccessAlert()
+        // self.showSuccessAlert()
         
-        if let url = URL(string: "https://spa-app.identityplayground.com") {
-            if #available(iOS 11.0, *) {
-                let config = SFSafariViewController.Configuration()
-            } else {
-                // Fallback on earlier versions
-            }
-            //config.entersReaderIfAvailable = true
-            
-            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
-            present(vc, animated: true)
-        }
+        //if let url = URL(string: "https://spa-app.identityplayground.com") {
+        //let string = "https://pravinady-sso-apps.auth0.com/authorize?response_type=code&code_challenge_method=S256&state=zMdcWnFno2jsBd0-KV45eTJePTAUpzJOPCyYJz87ViE&client_id=RcMbvKQo8dKhOCEkN1PNxrF9hFAx0blZ&redirect_uri=auth0.samples.Auth0Sample://pravinady-sso-apps.auth0.com/ios/auth0.samples.Auth0Sample/callback&scope=openid%20profile&code_challenge=EuZFZmxJYZ7lxCqJ1eYcOSErqngPao_ECK6kFzR87iY&auth0Client=eyJuYW1lIjoiQXV0aDAuc3dpZnQiLCJ2ZXJzaW9uIjoiMS4xMy4wIiwic3dpZnQtdmVyc2lvbiI6IjMuMCJ9"
+        let string = "http://spa-app.identityplayground.com"
+        guard let url = URL(string: string) else { return }
+        self.authSession = ASWebAuthenticationSession(url: url, callbackURLScheme: redirectURL?.absoluteString, completionHandler:
+        {
+            url, error in
+            print(url?.absoluteString as Any)
+            print(error.debugDescription)
+        })
+        
+        self.authSession?.start()
     }
 
     // MARK: - Private
