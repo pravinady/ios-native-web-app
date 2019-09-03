@@ -60,11 +60,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZp-gS-f01">
-                                <rect key="frame" x="238" y="648" width="104" height="30"/>
+                                <rect key="frame" x="191" y="648" width="199" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Open Web App"/>
+                                <state key="normal" title="ASWebAuthenticatedSession"/>
                                 <connections>
-                                    <action selector="showWebApp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SMk-XD-WTM"/>
+                                    <action selector="showASWebSession:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KDK-UT-mTu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7h-Ti-l8a">
+                                <rect key="frame" x="187" y="585" width="207" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="SFSafariAuthenticatedSession"/>
+                                <connections>
+                                    <action selector="showSFSafariSession:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTu-02-GYW"/>
                                 </connections>
                             </button>
                         </subviews>

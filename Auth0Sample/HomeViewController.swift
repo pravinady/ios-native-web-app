@@ -30,6 +30,7 @@ import AuthenticationServices
 class HomeViewController: UIViewController {
     
     private var authSession: ASWebAuthenticationSession?
+    private var sfSafariSession: SFAuthenticationSession?
 
     // MARK: - IBAction
     @IBAction func showLoginController(_ sender: UIButton) {
@@ -72,7 +73,7 @@ class HomeViewController: UIViewController {
             .appendingPathComponent("callback")
     }
     
-    @IBAction func showWebApp(_ sender: UIButton) {
+    @IBAction func showASWebSession(_ sender: UIButton) {
         // self.showSuccessAlert()
         
         //if let url = URL(string: "https://spa-app.identityplayground.com") {
@@ -88,7 +89,24 @@ class HomeViewController: UIViewController {
         
         self.authSession?.start()
     }
-
+   
+    
+    @IBAction func showSFSafariSession(_ sender: UIButton) {
+        // self.showSuccessAlert()
+        
+        //if let url = URL(string: "https://spa-app.identityplayground.com") {
+        //let string = "https://pravinady-sso-apps.auth0.com/authorize?response_type=code&code_challenge_method=S256&state=zMdcWnFno2jsBd0-KV45eTJePTAUpzJOPCyYJz87ViE&client_id=RcMbvKQo8dKhOCEkN1PNxrF9hFAx0blZ&redirect_uri=auth0.samples.Auth0Sample://pravinady-sso-apps.auth0.com/ios/auth0.samples.Auth0Sample/callback&scope=openid%20profile&code_challenge=EuZFZmxJYZ7lxCqJ1eYcOSErqngPao_ECK6kFzR87iY&auth0Client=eyJuYW1lIjoiQXV0aDAuc3dpZnQiLCJ2ZXJzaW9uIjoiMS4xMy4wIiwic3dpZnQtdmVyc2lvbiI6IjMuMCJ9"
+        let string = "http://spa-app.identityplayground.com"
+        guard let url = URL(string: string) else { return }
+        self.sfSafariSession = SFAuthenticationSession(url: url, callbackURLScheme: redirectURL?.absoluteString, completionHandler:  {
+            url, error in
+            print(url?.absoluteString as Any)
+            print(error.debugDescription)
+        })
+        self.sfSafariSession?.start()
+    }
+    
+    
     // MARK: - Private
     fileprivate func showSuccessAlert() {
         let alert = UIAlertController(title: "Web App", message: "Web App popup", preferredStyle: .alert)
