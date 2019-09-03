@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
     
     private var authSession: ASWebAuthenticationSession?
     private var sfSafariSession: SFAuthenticationSession?
+    private var safariVC: SFSafariViewController?
 
     // MARK: - IBAction
     @IBAction func showLoginController(_ sender: UIButton) {
@@ -106,6 +107,16 @@ class HomeViewController: UIViewController {
         self.sfSafariSession?.start()
     }
     
+    @IBAction func showSafariView(_ sender: UIButton) {
+        // self.showSuccessAlert()
+        
+        //if let url = URL(string: "https://spa-app.identityplayground.com") {
+        //let string = "https://pravinady-sso-apps.auth0.com/authorize?response_type=code&code_challenge_method=S256&state=zMdcWnFno2jsBd0-KV45eTJePTAUpzJOPCyYJz87ViE&client_id=RcMbvKQo8dKhOCEkN1PNxrF9hFAx0blZ&redirect_uri=auth0.samples.Auth0Sample://pravinady-sso-apps.auth0.com/ios/auth0.samples.Auth0Sample/callback&scope=openid%20profile&code_challenge=EuZFZmxJYZ7lxCqJ1eYcOSErqngPao_ECK6kFzR87iY&auth0Client=eyJuYW1lIjoiQXV0aDAuc3dpZnQiLCJ2ZXJzaW9uIjoiMS4xMy4wIiwic3dpZnQtdmVyc2lvbiI6IjMuMCJ9"
+        let string = "http://spa-app.identityplayground.com"
+        guard let url = URL(string: string) else { return }
+        self.safariVC = SFSafariViewController(url: url)
+        present(self.safariVC!, animated: true, completion: nil)
+    }
     
     // MARK: - Private
     fileprivate func showSuccessAlert() {
